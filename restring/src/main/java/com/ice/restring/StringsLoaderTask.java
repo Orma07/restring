@@ -33,13 +33,16 @@ class StringsLoaderTask extends AsyncTask<Void, Void, Map<String, Map<String, St
         Map<String, Map<String, String>> langStrings = new LinkedHashMap<>();
 
         List<String> languages = stringsLoader.getLanguages();
-        for (String lang : languages) {
-            Map<String, String> keyValues = stringsLoader.getStrings(lang);
-            if (keyValues != null && keyValues.size() > 0) {
-                langStrings.put(lang, keyValues);
+        try {
+            for (String lang : languages) {
+                Map<String, String> keyValues = stringsLoader.getStrings(lang);
+                if (keyValues != null && keyValues.size() > 0) {
+                    langStrings.put(lang, keyValues);
+                }
             }
-        }
+        }catch (Exception ex){
 
+        }
         return langStrings;
     }
 
