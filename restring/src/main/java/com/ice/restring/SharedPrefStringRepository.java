@@ -2,6 +2,7 @@ package com.ice.restring;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -79,8 +80,12 @@ class SharedPrefStringRepository implements StringRepository {
         Map<String, String> keyValues = new LinkedHashMap<>();
         String[] items = content.split(",");
         for (String item : items) {
-            String[] itemKeyValue = item.split("=");
-            keyValues.put(itemKeyValue[0], itemKeyValue[1].replaceAll(",,", ","));
+            try {
+                String[] itemKeyValue = item.split("=");
+                keyValues.put(itemKeyValue[0], itemKeyValue[1].replaceAll("§", ","));
+            }catch(Exception ex){
+                Log.e("AMRO_RESTRING", "deserialize error ex - " + ex.toString());
+            }
         }
         return keyValues;
     }
@@ -90,7 +95,7 @@ class SharedPrefStringRepository implements StringRepository {
         for (Map.Entry<String, String> item : keyValues.entrySet()) {
             content.append(item.getKey())
                     .append("=")
-                    .append(item.getValue().replaceAll(",", ",,"))
+                    .append(item.getValue().replaceAll(",", "§"))
                     .append(",");
         }
         content.deleteCharAt(content.length() - 1);
