@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Repository of strings.
  */
-interface StringRepository {
+public interface StringRepository {
 
     /**
      * Set strings(key, value) for a specific language.
@@ -31,7 +31,7 @@ interface StringRepository {
      * @param key      the string resource id.
      * @return the string if exists, otherwise NULL.
      */
-    String getString(String language, String key);
+     String getString(String language, String key);
 
     /**
      * Get all strings for a specific language.

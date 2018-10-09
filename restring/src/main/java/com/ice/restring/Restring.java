@@ -72,7 +72,7 @@ public abstract class Restring {
         stringRepository.setString(language, key, value);
     }
 
-    static StringRepository getStringRepository() {
+    public static StringRepository getStringRepository() {
         return stringRepository;
     }
 
